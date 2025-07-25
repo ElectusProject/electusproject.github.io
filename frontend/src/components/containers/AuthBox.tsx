@@ -76,7 +76,7 @@ export default function AuthBox({ user }: AuthBoxInput) {
 		return data; // { sessionId: ... }
 	}
 
-	const {state, dispatch} = useVoteCreateContext();
+	const { state, dispatch } = useVoteCreateContext();
 
 
 	const debounceRef = useRef<boolean>(false);
@@ -99,7 +99,6 @@ export default function AuthBox({ user }: AuthBoxInput) {
 		} else if (route.includes('voter')) {
 			navigate('/voter/join');
 		}
-
 	}
 
 	const submit = async () => {
@@ -149,7 +148,7 @@ export default function AuthBox({ user }: AuthBoxInput) {
 				placeholder="z1234567"
 				marginStyle="mt-[2em]"
 				setInput={setUsername}
-				w="w-[23em]"
+				w="w-[19em] sm:w-[23em]"
 				h="h-[2.5em]"
 				disabled={loading}
 			/>
@@ -159,6 +158,8 @@ export default function AuthBox({ user }: AuthBoxInput) {
 				placeholder="••••••••••••"
 				marginStyle="mt-[1em]"
 				setInput={setPassword}
+				w="w-[19em] sm:w-[10em]"
+				h="h-[2.5em]"
 				disabled={loading}
 			/>
 
@@ -171,7 +172,7 @@ export default function AuthBox({ user }: AuthBoxInput) {
 			<ThinGradientButton
 				text={loading ? 'Loading…' : 'Continue'}
 				margin="mt-10"
-				w="w-[23em]"
+				w="sm:w-[23em] w-[18em]"
 				onClick={submit}
 				disabled={loading}
 			/>

@@ -13,6 +13,20 @@
     "electionState": 0,
     "voters": []
   },
+  "421068175": {
+    "id": 421068175,
+    "authUserId": "3ff7669d4cea6175249a0d278ad406a24ac5822283274064dda909ac0995bd36",
+    "name": "Test Vote",
+    "description": "asdfasdfsadfsadf",
+    "images": [],
+    "location": "asdfas",
+    "date_time_start": "+123122-12-31T13:00:00.000Z",
+    "date_time_end": "+123122-12-31T13:00:00.000Z",
+    "requires_zid": true,
+    "questions": [],
+    "electionState": 0,
+    "voters": []
+  },
   "620517214": {
     "id": 620517214,
     "authUserId": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",

@@ -7,3 +7,9 @@ input[type="password"] {
   height: 1.47em;
   font-size: 170%;
 }
+
+@media screen and (max-width: 640px) {
+  input[type="password"] {
+    width: 11em;
+  }
+}

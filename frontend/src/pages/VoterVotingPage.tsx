@@ -221,13 +221,13 @@ export default function VoterVotingPage() {
                         text="Reset"
                         margin="mt-4"
                         onClick={() => handleReset()}
-                        w={"w-100"}
+                        w={"md:w-90 sm:w-60 w-30"}
                         disabled={loading}
                     />
                     <ThinGradientButton text={positionIndex === candidates.length - 1 ? 'Finish' : 'Confirm'}
-                        margin="mt-[0em]"
+                        margin="mt-4"
                         onClick={() => handleConfirm()}
-                        w={"w-100"}
+                        w={"md:w-90 sm:w-60 w-30"}
                         disabled={loading}
                     />
                 </div>

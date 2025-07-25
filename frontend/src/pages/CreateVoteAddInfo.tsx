@@ -84,11 +84,11 @@ export default function CreateVoteAddInfo() {
         ...options.headers,
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`API call failed: ${response.statusText}`);
     }
-    
+
     return response.json();
   };
   // Load initial data on component mount
@@ -101,7 +101,7 @@ export default function CreateVoteAddInfo() {
   const loadInitialData = async () => {
     try {
       setIsLoading(true);
-      
+
       if (isEditMode && pos_id) {
         // Load existing position data
         await loadExistingPosition();
@@ -115,7 +115,7 @@ export default function CreateVoteAddInfo() {
         ]);
         setPositionName("President");
       }
-      
+
       await loadPositions();
       setInitialDataLoaded(true);
     } catch (error) {
@@ -129,21 +129,21 @@ export default function CreateVoteAddInfo() {
     if (!pos_id) return;
 
     try {
-        console.log("CANDIDATE RESPONSE -2")
+      console.log("CANDIDATE RESPONSE -2")
 
       // Load position details from positions list
       const positionsResponse = await apiCall(`/api/auth/viewPositions/${vote_id}`);
       console.log(positionsResponse)
       const position = positionsResponse.result?.positions?.find((p: Position) => p.id === Number(pos_id));
-        console.log("CANDIDATE RESPONSE -1")
-      
+      console.log("CANDIDATE RESPONSE -1")
+
       if (position) {
         console.log("CANDIDATE RESPONSE 0")
 
         setPositionName(position.title);
         setVotingType(position.questionType);
         setCurrentPositionId(Number(pos_id));
-        
+
         // Load candidates for this position
         const candidatesResponse = await apiCall(`/api/auth/votes/${vote_id}/positions/${pos_id}/candidates`);
         console.log("CANDIDATE RESPONSE 1")
@@ -168,7 +168,7 @@ export default function CreateVoteAddInfo() {
     if (e.key === "Enter" && newCandidate.trim()) {
       const candidateName = newCandidate.trim();
       const debounceKey = `add-candidate-${candidateName}`;
-      
+
       // Optimistically update UI
       setCandidates(prev => [...prev, { name: candidateName }]);
       setNewCandidate("");
@@ -204,13 +204,13 @@ export default function CreateVoteAddInfo() {
 
     const newName = editingName.trim();
     const debounceKey = `edit-candidate-${index}-${newName}`;
-    
+
     // Optimistically update UI
     const updatedCandidates = [...candidates];
     const oldName = updatedCandidates[index].name;
-    updatedCandidates[index] = { 
-      ...updatedCandidates[index], 
-      name: newName 
+    updatedCandidates[index] = {
+      ...updatedCandidates[index],
+      name: newName
     };
     setCandidates(updatedCandidates);
     setEditingIndex(null);
@@ -251,7 +251,7 @@ export default function CreateVoteAddInfo() {
   const removeCandidate = async (index: number) => {
     const candidateToRemove = candidates[index];
     const debounceKey = `remove-candidate-${index}`;
-    
+
     // Optimistically update UI
     setCandidates(prev => prev.filter((_, i) => i !== index));
 
@@ -276,7 +276,7 @@ export default function CreateVoteAddInfo() {
 
   const deletePosition = async () => {
     if (!isEditMode || !currentPositionId) return;
-    
+
     if (window.confirm('Are you sure you want to delete this position? This action cannot be undone.')) {
       try {
         setIsLoading(true);
@@ -298,66 +298,66 @@ export default function CreateVoteAddInfo() {
   };
 
 
-    const handleSavePosition = () => {
-      // guard early (optional), like you had before
-      if (!positionName.trim() || (!isEditMode && !votingType)) {
-        alert('Please fill in all required fields');
-        return;
-      }
+  const handleSavePosition = () => {
+    // guard early (optional), like you had before
+    if (!positionName.trim() || (!isEditMode && !votingType)) {
+      alert('Please fill in all required fields');
+      return;
+    }
 
-      // debounce key must be unique
-      const debounceKey = 'create-position';
+    // debounce key must be unique
+    const debounceKey = 'create-position';
 
-      debounce(debounceKey, async () => {
-        try {
-          setIsLoading(true);
+    debounce(debounceKey, async () => {
+      try {
+        setIsLoading(true);
 
-          if (isEditMode) {
-            // edit-mode just navigates back
-            navigate(`/creator/create-vote/${vote_id}/positions`);
-          } else {
-            // 1) create the position
-            const response = await apiCall('/api/auth/createPosition', {
-              method: 'POST',
-              body: JSON.stringify({
-                voteId: Number(vote_id),
-                title: positionName.trim(),
-                questionType: votingType
-              })
-            });
+        if (isEditMode) {
+          // edit-mode just navigates back
+          navigate(`/creator/create-vote/${vote_id}/positions`);
+        } else {
+          // 1) create the position
+          const response = await apiCall('/api/auth/createPosition', {
+            method: 'POST',
+            body: JSON.stringify({
+              voteId: Number(vote_id),
+              title: positionName.trim(),
+              questionType: votingType
+            })
+          });
 
-            const positionId = response.result?.positionId;
-            if (!positionId) throw new Error('Position creation failed');
+          const positionId = response.result?.positionId;
+          if (!positionId) throw new Error('Position creation failed');
 
-            // 2) then batch-create the candidates
-            const candidatePromises = candidates.map((candidate, index) =>
-              new Promise(resolve =>
-                setTimeout(() => {
-                  apiCall('/api/auth/createCandidate', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                      voteId: Number(vote_id),
-                      positionId,
-                      name: candidate.name
-                    })
+          // 2) then batch-create the candidates
+          const candidatePromises = candidates.map((candidate, index) =>
+            new Promise(resolve =>
+              setTimeout(() => {
+                apiCall('/api/auth/createCandidate', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    voteId: Number(vote_id),
+                    positionId,
+                    name: candidate.name
                   })
-                    .then(resolve)
-                    .catch(resolve);
-                }, index * 100)
-              )
-            );
+                })
+                  .then(resolve)
+                  .catch(resolve);
+              }, index * 100)
+            )
+          );
 
-            await Promise.all(candidatePromises);
-            navigate(`/creator/create-vote/${vote_id}/positions`);
-          }
-        } catch (error) {
-          console.error('Failed to save position:', error);
-          alert('Failed to save position. Please try again.');
-        } finally {
-          setIsLoading(false);
+          await Promise.all(candidatePromises);
+          navigate(`/creator/create-vote/${vote_id}/positions`);
         }
-      }, /* delay= */ 300);
-    };
+      } catch (error) {
+        console.error('Failed to save position:', error);
+        alert('Failed to save position. Please try again.');
+      } finally {
+        setIsLoading(false);
+      }
+    }, /* delay= */ 300);
+  };
 
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
@@ -386,8 +386,8 @@ export default function CreateVoteAddInfo() {
         pt-[0rem]
         p-[6rem]
     ">
-        <button 
-          className="hover:cursor-pointer text-white p-4 text-2xl absolute top-2 left-4 z-10" 
+        <button
+          className="hover:cursor-pointer text-white p-4 text-2xl absolute top-2 left-4 z-10"
           onClick={goBack}
           disabled={isLoading}
         >
@@ -408,7 +408,8 @@ export default function CreateVoteAddInfo() {
             )}
           </div>
 
-          <div className="border-2 border-[#f1e9e9] bg-linear-130 from-violet-950/35 to-white/30 backdrop-blur-sm rounded-4xl p-6 md:p-8">
+          {/* Container starts here */}
+          <div className="border-2 border-[#f1e9e9] bg-linear-130 from-violet-950/35 to-white/30 backdrop-blur-sm rounded-4xl p-6 md:p-8 w-90 sm:w-full">
             <div className="space-y-6">
               <div className="space-y-2">
                 <label htmlFor="position" className="text-white text-lg">
@@ -469,14 +470,14 @@ export default function CreateVoteAddInfo() {
                       <div className="flex space-x-2">
                         {editingIndex === index ? (
                           <>
-                            <button 
+                            <button
                               className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-green-500/20 rounded-md text-white text-xs"
                               onClick={() => saveEditCandidate(index)}
                               disabled={isLoading}
                             >
                               ✓
                             </button>
-                            <button 
+                            <button
                               className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-red-500/20 rounded-md text-white text-xs"
                               onClick={cancelEditCandidate}
                               disabled={isLoading}
@@ -486,7 +487,7 @@ export default function CreateVoteAddInfo() {
                           </>
                         ) : (
                           <>
-                            <button 
+                            <button
                               className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-white/5 rounded-md"
                               onClick={() => startEditingCandidate(index)}
                               disabled={isLoading}
@@ -519,10 +520,10 @@ export default function CreateVoteAddInfo() {
               </div>
 
               <div className="flex justify-center mt-6">
-                <ThinGradientButton 
-                  text={isLoading ? "Saving..." : "Save"} 
-                  margin="mt-2" 
-                  onClick={handleSavePosition} 
+                <ThinGradientButton
+                  text={isLoading ? "Saving..." : "Save"}
+                  margin="mt-2"
+                  onClick={handleSavePosition}
                   w={'w-30'}
                   disabled={isLoading}
                 />

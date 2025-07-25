@@ -14,62 +14,62 @@ export default function AddPositionsPage() {
     const [isFetching, setIsFetching] = useState(false);
     // const [positions, setPositions] = useState<>([]);
     const debounceRef = useRef<boolean>(false);
-    
+
     const [questions, SetQuestions] = useState<Question[]>([]);
 
 
 
     // const [votingSessions, setVotingSessions] = useState<Election[]>([]);
 
-    const {vote_id} = useParams();
+    const { vote_id } = useParams();
 
-      const {state, dispatch} = useVoteCreateContext();
-    
+    const { state, dispatch } = useVoteCreateContext();
 
-      const API_URL = import.meta.env.VITE_BACKEND_URL;
-    
-      useEffect(() => {
+
+    const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+    useEffect(() => {
         if (!isFetching) {
             setIsFetching(true);
             (async () => {
-            if (debounceRef.current) return;
-            debounceRef.current = true;
-            setTimeout(() => (debounceRef.current = false), 1000);
-    
-            try {
-                const res = await fetch(`${API_URL}/api/auth/viewElections`, {
-                    headers: {
-                        'x-session-id': localStorage.getItem('user-session-id') || ''
-                    }
+                if (debounceRef.current) return;
+                debounceRef.current = true;
+                setTimeout(() => (debounceRef.current = false), 1000);
+
+                try {
+                    const res = await fetch(`${API_URL}/api/auth/viewElections`, {
+                        headers: {
+                            'x-session-id': localStorage.getItem('user-session-id') || ''
+                        }
                     });
-                if (!res.ok) throw new Error("Failed to fetch voting sessions");
-                const data = await res.json();
-                dispatch({type: "SET_ELECTIONS", payload: data.result.elections})
+                    if (!res.ok) throw new Error("Failed to fetch voting sessions");
+                    const data = await res.json();
+                    dispatch({ type: "SET_ELECTIONS", payload: data.result.elections })
 
-                let electionsFind: Election[] = data.result.elections;
-                console.log("FOUND ELECTIONS")
+                    let electionsFind: Election[] = data.result.elections;
+                    console.log("FOUND ELECTIONS")
 
-                console.log(electionsFind)
+                    console.log(electionsFind)
 
-                let find_election = electionsFind.find((e) => String(e.id).match(String(vote_id)))
+                    let find_election = electionsFind.find((e) => String(e.id).match(String(vote_id)))
 
-                if (find_election !== undefined && find_election !== null) {
-                    SetQuestions(find_election.questions)
+                    if (find_election !== undefined && find_election !== null) {
+                        SetQuestions(find_election.questions)
+                    }
+                    // setVotingSessions(data.result.elections);
+                } catch (err: any) {
+                    console.error(err);
+                    window.alert(err.message || "An unknown error occurred");
+
+
+
+                } finally {
+                    setLoading(false);
+                    setIsFetching(false);
                 }
-                // setVotingSessions(data.result.elections);
-            } catch (err: any) {
-                console.error(err);
-                window.alert(err.message || "An unknown error occurred");
-
-
-
-            } finally {
-                setLoading(false);
-                setIsFetching(false);
-            }
             })();
         }
-      }, []);
+    }, []);
 
     const handleReorder = (index: number, direction: 'up' | 'down') => {
         // setPositions(reorderElements(positions, index, direction));
@@ -130,7 +130,7 @@ export default function AddPositionsPage() {
                     </div>
                 ))}
                 <WideAddButton onClick={() => handleAddPositions()} disabled={loading}></WideAddButton>
-                <ThinGradientButton text="Save" margin="mt-2 mr-22" onClick={navigateAllVotes} disabled={loading} w={'w-25'}  />
+                <ThinGradientButton text="Save" margin="mt-2" onClick={navigateAllVotes} disabled={loading} w={'w-25'} />
             </div>
         </StyledBackground>
     )

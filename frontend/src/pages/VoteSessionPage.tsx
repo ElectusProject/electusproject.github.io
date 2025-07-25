@@ -10,8 +10,6 @@ interface OrganiserInput {
   name: string;
 }
 
-
-
 // Main VoteSessionPage component
 export default function VoteSessionPage({ name }: OrganiserInput) {
   const [loading, setLoading] = useState(true);
@@ -23,91 +21,89 @@ export default function VoteSessionPage({ name }: OrganiserInput) {
 
 
 
-
-
   const [headerText, setHeaderText] = useState("Loading");
   const [buttonText, setButtonText] = useState("Loading");
 
   const debounceRef = useRef<boolean>(false);
 
 
-    async function HandleButtonAction() {
+  async function HandleButtonAction() {
 
-      // WAITING TO START
-      if (curElectionState?.electionState === 0) {
-
-
-
-        if (debounceRef.current) return;
-        debounceRef.current = true;
-        setTimeout(() => (debounceRef.current = false), 1000);
+    // WAITING TO START
+    if (curElectionState?.electionState === 0) {
 
 
 
-          try {
-            const res = await fetch(`${API_URL}/api/elections/activateSession/${curElectionState.id}`, {
-                headers: {
-                    'x-session-id': localStorage.getItem('user-session-id') || ''
-                },
-                method: "POST"
-                });
-            if (!res.ok) throw new Error("Failed to fetch voting sessions");
-            const data = await res.json();
-              
-            // setVotingSessions(data.result.elections);
-        } catch (err: any) {
-            console.error(err);
-            window.alert(err.message || "An unknown error occurred");
+      if (debounceRef.current) return;
+      debounceRef.current = true;
+      setTimeout(() => (debounceRef.current = false), 1000);
+
+
+
+      try {
+        const res = await fetch(`${API_URL}/api/elections/activateSession/${curElectionState.id}`, {
+          headers: {
+            'x-session-id': localStorage.getItem('user-session-id') || ''
+          },
+          method: "POST"
+        });
+        if (!res.ok) throw new Error("Failed to fetch voting sessions");
+        const data = await res.json();
+
+        // setVotingSessions(data.result.elections);
+      } catch (err: any) {
+        console.error(err);
+        window.alert(err.message || "An unknown error occurred");
 
 
 
 
-        } finally {
-            setLoading(false);
-            setIsFetching(false);
+      } finally {
+        setLoading(false);
+        setIsFetching(false);
 
-            setTimeout(() => {
-                window.location.reload()
-            }, 1000);
-        }
-
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
       }
-      // HAS ALREADY STARTED i.e STOP VOTE
-      else if (curElectionState?.electionState === 1) {
-        console.log("STOPPING VOTE")
-
-
-        try {
-            const res = await fetch(`${API_URL}/api/elections/endElection/${curElectionState.id}`, {
-                headers: {
-                    'x-session-id': localStorage.getItem('user-session-id') || ''
-                },
-                method: "POST"
-                });
-            if (!res.ok) throw new Error("Failed to fetch voting sessions");
-            const data = await res.json();
-
-            console.log("END ELECTION RESULT")
-            console.log(data)
-        } catch (error) {
-          console.log(error);
-        } finally {
-
-            setTimeout(() => {
-                window.location.reload()
-            }, 1000);
-        }
-
-      } 
-      // Else stopped
-      else {
-        console.log("vote already stopped")
-      }
-
-
-
 
     }
+    // HAS ALREADY STARTED i.e STOP VOTE
+    else if (curElectionState?.electionState === 1) {
+      console.log("STOPPING VOTE")
+
+
+      try {
+        const res = await fetch(`${API_URL}/api/elections/endElection/${curElectionState.id}`, {
+          headers: {
+            'x-session-id': localStorage.getItem('user-session-id') || ''
+          },
+          method: "POST"
+        });
+        if (!res.ok) throw new Error("Failed to fetch voting sessions");
+        const data = await res.json();
+
+        console.log("END ELECTION RESULT")
+        console.log(data)
+      } catch (error) {
+        console.log(error);
+      } finally {
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
+      }
+
+    }
+    // Else stopped
+    else {
+      console.log("vote already stopped")
+    }
+
+
+
+
+  }
 
 
   function InitalDataLoad(input_election: Election) {
@@ -164,7 +160,7 @@ export default function VoteSessionPage({ name }: OrganiserInput) {
           console.log("FOUND ELECTIONS");
           console.log(electionsFind);
           console.log(vote_id);
-          
+
           let find_election = electionsFind.find((e) =>
             String(e.id).match(String(vote_id))
           );
@@ -275,32 +271,32 @@ export default function VoteSessionPage({ name }: OrganiserInput) {
           <div className="flex self-center text-2xl mt-10 text-[#F1E9E9]">
             {headerText}
           </div>
-          <div className="mt-8">
-            <div className="box-bg-style w-[35rem] h-[40rem] p-12 text-center flex flex-col items-center text-2xl text-white border-1 border-[#F1E9E9] rounded-4xl">
+          <div id="box-of-voters-in-session" className="mt-8">
+            <div className="sm:w-full w-85 box-bg-style h-[40rem] p-12 text-center flex flex-col items-center text-2xl text-white border-1 border-[#F1E9E9] rounded-4xl">
               <div>
-              There are {count} voters in this session.
+                There are {count} voters in this session.
               </div>
-             <div>
-              {curElectionState?.sessionCode && (<>Session Code: {curElectionState.sessionCode}</>)}
+              <div>
+                {curElectionState?.sessionCode && (<>Session Code: {curElectionState.sessionCode}</>)}
               </div>
-              {/* a good idea would be to remove the "w-100" from below when thinking about mobile responsiveness */}
-              <div className="w-100 h-100 overflow-scroll m-8 no-scrollbar">
+              <div className="w-full h-full sm:w-100 sm:h-100 overflow-scroll m-8 no-scrollbar">
                 {zidList.map((zid, index) => (
-                  <ZidContainers 
-                    key={index} 
-                    width="" 
-                    height="h-10" 
-                    zid={zid} 
-                    zidList={zidList} 
-                    setZidList={setZidList} 
+                  <ZidContainers
+                    key={index}
+                    width=""
+                    height="h-10"
+                    zid={zid}
+                    zidList={zidList}
+                    setZidList={setZidList}
                   />
                 ))}
               </div>
-              <div className="ml-100">
+              {/* TODO: QR Code Functionality */}
+              {/* <div className="ml-100">
                 <SampleQRButton />
-              </div>
-              
-              <button 
+              </div> */}
+
+              <button
                 onClick={() => {
                   // TODO: Start the voting session, passing through the list of voters
                   // navigate('/creator/view-voting-sessions');

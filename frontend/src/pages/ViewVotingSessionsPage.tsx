@@ -79,7 +79,7 @@ export default function ViewVotingSessionsPage() {
       <div className="relative h-[100vh] p-[6rem] overflow-y-auto no-scrollbar">
         {/* logout */}
         <button
-          className="p-4 absolute top-2 right-4 z-20 hover:cursor-pointer"
+          className="p-4 absolute md:top-2 md:right-4 md:z-20 sm:top-0 sm:right-8 top-0 right-10 hover:cursor-pointer"
           onClick={handleLogout}
           disabled={loading}
         >
