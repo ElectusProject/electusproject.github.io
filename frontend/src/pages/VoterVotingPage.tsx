@@ -26,13 +26,13 @@ export default function VoterVotingPage() {
     }
     const placeHolderCandidates: thisPagesCandidates[] = [
         {
-            position: 'Treasurer',
-            candidates: ['Matthew Stewart', 'Lara Thiele', 'Lotte Schipper']
+            position: '',
+            candidates: ['', '', '','']
         },
         {
-            position: 'GEDI Officer',
-            candidates: ['Alexander Taylor', 'Alexia Lebrun', 'Carolina Barboza']
-        }
+            position: '',
+            candidates: ['', '', '','']
+        },
     ]
 
     useEffect(() => {
@@ -188,12 +188,13 @@ export default function VoterVotingPage() {
     };
 
     return (
-        <StyledBackground className='main'>
+        <StyledBackground className='main mb-[500px]'>
             <div className="
                 flex flex-col overflow-y-auto no-scrollbar gap-[1.5em] 
                 h-[100vh]
                 pt-[0rem]
                 p-[6rem]
+                pb-[10rem]
             ">
                 <Heading text={`Now voting for ${positionName}`} />
                 <MedHeading text="Order or delete the candidates based on your choice."></MedHeading>
