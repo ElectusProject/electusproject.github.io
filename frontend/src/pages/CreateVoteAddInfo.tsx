@@ -400,7 +400,7 @@ export default function CreateVoteAddInfo() {
             {isEditMode && (
               <button
                 onClick={deletePosition}
-                className="bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-300 px-4 py-2 rounded-md transition-colors"
+                className="bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-300 px-4 py-2 !rounded-md transition-colors"
                 disabled={isLoading}
               >
                 Delete Position
@@ -409,7 +409,7 @@ export default function CreateVoteAddInfo() {
           </div>
 
           {/* Container starts here */}
-          <div className="border-2 border-[#f1e9e9] bg-linear-130 from-violet-950/35 to-white/30 backdrop-blur-sm rounded-4xl p-6 md:p-8 w-90 sm:w-full">
+          <div className="border-2 border-[#f1e9e9] bg-linear-130 from-violet-950/35 to-white/30 backdrop-blur-sm !rounded-4xl p-6 md:p-8 w-90 sm:w-full">
             <div className="space-y-6">
               <div className="space-y-2">
                 <label htmlFor="position" className="text-white text-lg">
@@ -420,7 +420,7 @@ export default function CreateVoteAddInfo() {
                   type="text"
                   value={positionName}
                   onChange={(e) => setPositionName(e.target.value)}
-                  className="w-full p-3 rounded-md bg-white text-black"
+                  className="w-full p-3 !rounded-md bg-white text-black"
                   disabled={isLoading}
                 />
               </div>
@@ -434,7 +434,7 @@ export default function CreateVoteAddInfo() {
                     id="voting-type"
                     value={votingType}
                     onChange={(e) => setVotingType(e.target.value)}
-                    className="w-full p-3 rounded-md bg-white text-black focus:outline-none"
+                    className="w-full p-3 !rounded-md bg-white text-black focus:outline-none"
                     disabled={isLoading}
                   >
                     <option value="" disabled>
@@ -471,14 +471,14 @@ export default function CreateVoteAddInfo() {
                         {editingIndex === index ? (
                           <>
                             <button
-                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-green-500/20 rounded-md text-white text-xs"
+                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-green-500/20 !rounded-md text-white text-xs"
                               onClick={() => saveEditCandidate(index)}
                               disabled={isLoading}
                             >
                               ✓
                             </button>
                             <button
-                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-red-500/20 rounded-md text-white text-xs"
+                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-red-500/20 !rounded-md text-white text-xs"
                               onClick={cancelEditCandidate}
                               disabled={isLoading}
                             >
@@ -488,14 +488,14 @@ export default function CreateVoteAddInfo() {
                         ) : (
                           <>
                             <button
-                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-white/5 rounded-md"
+                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-white/5 !rounded-md"
                               onClick={() => startEditingCandidate(index)}
                               disabled={isLoading}
                             >
                               <img src={editIcon} alt="Edit" className="w-4 h-4" />
                             </button>
                             <button
-                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-white/5 rounded-md"
+                              className="hover:cursor-pointer p-1.5 border border-[#f1e9e9] bg-white/5 !rounded-md"
                               onClick={() => removeCandidate(index)}
                               disabled={isLoading}
                             >
@@ -513,7 +513,7 @@ export default function CreateVoteAddInfo() {
                     onChange={(e) => setNewCandidate(e.target.value)}
                     onKeyDown={addCandidate}
                     placeholder="Type a name to add..."
-                    className="w-full px-6 py-3 bg-white/5 border border-[#f1e9e9] rounded-full text-white placeholder-white/70 focus:outline-none"
+                    className="w-full px-6 py-3 bg-white/5 border border-[#f1e9e9] !rounded-full text-white placeholder-white/70 focus:outline-none"
                     disabled={isLoading}
                   />
                 </div>
