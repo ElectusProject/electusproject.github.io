@@ -37,6 +37,7 @@
   "dependencies": {
     "async-mutex": "^0.5.0",
     "babel-jest": "^29.7.0",
+    "canvas-confetti": "^1.9.3",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "http-status-codes": "^2.3.0",

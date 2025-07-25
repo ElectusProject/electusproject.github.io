@@ -28,7 +28,7 @@ export default function CreateVoteAddInfo() {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [newCandidate, setNewCandidate] = useState("");
   const [positionName, setPositionName] = useState("");
-  const [votingType, setVotingType] = useState("");
+  const [votingType, setVotingType] = useState("preferential");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editingName, setEditingName] = useState("");
   const [positions, setPositions] = useState<Position[]>([]);
