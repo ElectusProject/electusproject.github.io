@@ -25,7 +25,7 @@ export default function MainButton(props: MainButtonProps) {
     }
 
     return (
-        <div className='main-button' onClick={button_click}>
+        <div className='main-button w-[400px] h-[400px]' onClick={button_click}>
             <div style={{ scale: 0.8 }}>
                 <Icon />
             </div>

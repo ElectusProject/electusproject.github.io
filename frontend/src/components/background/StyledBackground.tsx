@@ -24,7 +24,6 @@ const StyledBackground: React.FC<StyledBackgroundProps> = ({ children, className
                 <Banner />
                 <div className='pt-[60px] flex flex-col'>
                     {children}
-                    
                 </div>
                 
             </div>

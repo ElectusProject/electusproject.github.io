@@ -23,7 +23,8 @@ body {
     flex-wrap: wrap;
     gap: 2rem;
     padding-bottom: 10rem;
-    height: 100vh;
+    /* height: 10px; */
+    /* background-color: blueviolet; */
 }
 
 @media (max-width: 768px) {
