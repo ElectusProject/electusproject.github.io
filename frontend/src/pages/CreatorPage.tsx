@@ -39,7 +39,11 @@ export default function CreatorPage() {
     }, [navigate]);
     //ADd loading component here
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <StyledBackground className='main justify-center items-center'>
+                <div>Loading...</div>
+            </StyledBackground>
+        );
     }
     return (
         <StyledBackground className='main flex flex-col justify-center items-center md:items-start md:justify-start'>
