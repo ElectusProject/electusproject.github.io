@@ -14,7 +14,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // backend server port i added this so we can make api requests to the backend
+        target: 'https://api.taskglass.work', // backend server port i added this so we can make api requests to the backend
+        // target: 'http://localhost:3000', // backend server port i added this so we can make api requests to the backend
         changeOrigin: true,
       },
     },

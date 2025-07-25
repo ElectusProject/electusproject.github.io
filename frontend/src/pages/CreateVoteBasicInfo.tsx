@@ -47,7 +47,10 @@ export default function CreateVoteBasicInfo() {
         };
         // submit form on continue
         try {
-            const fetchResponse = await fetch(`http://localhost:3000/api/auth/createElection`, params);
+
+            const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+            const fetchResponse = await fetch(`${API_URL}/api/auth/createElection`, params);
             const data = await fetchResponse.json();
             console.log(data);
 
