@@ -4,6 +4,8 @@
 
 ### Mono Repo Guide
 
+new repo
+
 As you can see this project has the following folders:
 
 - `backend`: for the Node TS backend code
