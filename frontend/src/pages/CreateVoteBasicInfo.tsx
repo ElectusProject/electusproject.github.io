@@ -113,7 +113,7 @@ export default function CreateVoteBasicInfo() {
                                     id="voteName"
                                     type="text"
                                     placeholder="DevSoc AGM Voting 2025"
-                                    className="w-full p-3 rounded-md bg-white text-black"
+                                    className="w-full p-3 !rounded-md bg-white text-black"
                                     value={electionName}
                                     onChange={(e) => setElectionName(e.target.value)}
                                 />
@@ -128,7 +128,7 @@ export default function CreateVoteBasicInfo() {
                                         id="location"
                                         type="text"
                                         placeholder="F10 Junge Griffith M17"
-                                        className="w-full p-3 rounded-md bg-white text-black"
+                                        className="w-full p-3 !rounded-md bg-white text-black"
                                         value={locationOfVote}
                                         onChange={(e) => setLocationOfVote(e.target.value)}
                                     />
@@ -142,7 +142,7 @@ export default function CreateVoteBasicInfo() {
                                         id="dateTime"
                                         type="text"
                                         placeholder="Thu 2 October 2014, 14:45"
-                                        className="w-full p-3 rounded-md bg-white text-black"
+                                        className="w-full p-3 !rounded-md bg-white text-black"
                                         value={startDate}
                                         onChange={(e) => { setStartDate(e.target.value); }}
                                     />
@@ -156,7 +156,7 @@ export default function CreateVoteBasicInfo() {
                                 <textarea
                                     id="description"
                                     rows={6}
-                                    className="w-full p-3 rounded-md bg-white text-black"
+                                    className="w-full p-3 !rounded-md bg-white text-black"
                                     placeholder={`This meeting will be held to receive executive reports for 2024 📝, propose and approve amendments to our Club's constitution as well as announce our new Executive team for the next 12 months!
 
     Executive will also showcase all the new features developed under our current development.`}
@@ -183,7 +183,7 @@ export default function CreateVoteBasicInfo() {
                                         checked={requireVerification}
                                         onChange={() => setRequireVerification(!requireVerification)}
                                     />
-                                    <div className="w-11 h-6 bg-[#a2a2a2] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6b1bb2]"></div>
+                                    <div className="w-11 h-6 bg-[#a2a2a2] peer-focus:outline-none !rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#6b1bb2]"></div>
                                 </label>
                             </div>
 

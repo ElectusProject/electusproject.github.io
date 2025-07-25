@@ -20,7 +20,7 @@ export default function AuthInput({ type, label, placeholder, marginStyle, w, h,
 		<div className={`flex justify-center ${marginStyle}`}>
 			<div className="flex flex-col">
 				<div className="text-[#f1e9e9] text-xl"> {label} </div>
-				<input type={type} onChange={handleInputChange} style={{ fontFamily: "Lexend" }} placeholder={placeholder} className={`mt-2 p-4 ${w} ${h} border-2 border-[#f1e9e9] bg-[#f1e9e9] rounded-md`} />
+				<input type={type} onChange={handleInputChange} style={{ fontFamily: "Lexend" }} placeholder={placeholder} className={`mt-2 p-4 ${w} ${h} border-2 border-[#f1e9e9] bg-[#f1e9e9] !rounded-md`} />
 			</div>
 		</div>
 	);

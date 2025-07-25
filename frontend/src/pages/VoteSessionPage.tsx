@@ -272,7 +272,7 @@ export default function VoteSessionPage({ name }: OrganiserInput) {
             {headerText}
           </div>
           <div id="box-of-voters-in-session" className="mt-8">
-            <div className="sm:w-full w-85 box-bg-style h-[40rem] p-12 text-center flex flex-col items-center text-2xl text-white border-1 border-[#F1E9E9] rounded-4xl">
+            <div className="sm:w-full w-85 box-bg-style h-[40rem] p-12 text-center flex flex-col items-center text-2xl text-white border-1 border-[#F1E9E9] !rounded-4xl">
               <div>
                 There are {count} voters in this session.
               </div>
@@ -302,7 +302,7 @@ export default function VoteSessionPage({ name }: OrganiserInput) {
                   // navigate('/creator/view-voting-sessions');
                   HandleButtonAction()
                 }}
-                className="hover:opacity-85 text-xl cursor-pointer w-55 h-12 text-white text-center content-center border-1 border-[#F1E9E9] rounded-4xl backdrop-blur-2xl bg-gradient-to-br from-violet-950/70 to-white/10"
+                className="hover:opacity-85 text-xl cursor-pointer w-55 h-12 text-white text-center content-center border-1 border-[#F1E9E9] !rounded-4xl backdrop-blur-2xl bg-gradient-to-br from-violet-950/70 to-white/10"
               >
                 {buttonText}
               </button>

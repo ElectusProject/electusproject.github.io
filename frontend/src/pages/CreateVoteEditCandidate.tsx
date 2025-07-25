@@ -25,7 +25,7 @@ export default function CreateVoteEditCandidate() {
           <Heading text="Edit Candidate" />
         </div>
 
-        <div className="border-2 border-[#f1e9e9] bg-linear-130 from-violet-950/40 to-white/30 backdrop-blur-sm rounded-4xl p-6 md:p-8">
+        <div className="border-2 border-[#f1e9e9] bg-linear-130 from-violet-950/40 to-white/30 backdrop-blur-sm !rounded-4xl p-6 md:p-8">
           <form className="space-y-6">
             <div className="space-y-2">
               <label htmlFor="name" className="text-white text-lg">
@@ -36,7 +36,7 @@ export default function CreateVoteEditCandidate() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full p-3 rounded-md bg-white text-black"
+                className="w-full p-3 !rounded-md bg-white text-black"
               />
             </div>
 
@@ -49,14 +49,14 @@ export default function CreateVoteEditCandidate() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={3}
-                className="w-full p-3 rounded-md bg-white text-black"
+                className="w-full p-3 !rounded-md bg-white text-black"
               />
             </div>
 
             <div>
               <button type="button" className="flex items-center gap-2 text-white">
                 <span>Add an image</span>
-                <div className="hover:cursor-pointer hover:opacity-50 bg-linear-130 border-[0.5px] from-white/30 rounded-full flex flex-col items-center justify-center p-4 h-2 w-2">
+                <div className="hover:cursor-pointer hover:opacity-50 bg-linear-130 border-[0.5px] from-white/30 !rounded-full flex flex-col items-center justify-center p-4 h-2 w-2">
                   +
                 </div>
               </button>

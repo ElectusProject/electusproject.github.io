@@ -20,7 +20,7 @@ export default function VoterCode({ zidList, setZidList }: VoterCodeInput) {
 
   return (
     <>
-      <div className='box-bg-style rounded-4xl w-[10rem] md:w-[30rem] md:h-[14rem] p-12'>
+      <div className='box-bg-style !rounded-4xl w-[10rem] md:w-[30rem] md:h-[14rem] p-12'>
         <div className="flex flex-row mb-5">
           <AuthInput type="text" setInput={setInputVoterCode} h="h-[2.5em]" w="w-70" label="Voter's code" placeholder="ABC123" marginStyle="ml-2" />
           <div className="mt-7 ml-5">  {/* note - could do a marginStyle for SampleQRButton like AuthInput */}
